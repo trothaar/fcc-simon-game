@@ -1,0 +1,60 @@
+body{
+  background-color: #804000 !important;
+}
+
+h1{
+  color: #FFFFFF !important;
+}
+
+#gameboard{
+  margin: 33px;
+  border: 10px solid #333;
+  background-color: #333;
+  border-radius: 50%;
+  height: 500px;
+  width: 500px;
+  padding: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+#control-panel{
+  margin: 84px;
+  background-color: white;
+  border-radius: 50%;
+  height: 250px;
+  width: 250px;
+  padding: 30px;
+  overflow: hidden;
+  position: relative;
+  border: 10px solid #333;
+}
+
+#simon{
+  font-family: 'Alfa Slab One', cursive;
+  font-size: 42px;
+}
+
+#score-box{
+  font-family: 'VT323', monospace;
+  font-weight: bold;
+  font-size: 24px;
+  height: 40px;
+  width: 65px;
+  border: 3px solid #333333;
+  border-radius: 10px;
+  color: #ff0000;
+  background-color: #FFFFFF;
+  margin-top: 21px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#footer{
+  width: 25%;
+  padding: 25px;
+  margin-top: 25px;
+  background-color: #ffbd80;
+  border: 2px solid #908b85;
+  border-radius: 20px;
+}
