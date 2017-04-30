@@ -70,14 +70,14 @@
 </head>
 <body>
 
-<div class = "container-fluid text-center">
+<div class = "container-fluid">
   <h1>Free Code Camp Simon<sup>&#174;</sup> Game</h1>
   <!--  Row will have three columns, with gameboardin the center-->
   <div class = "row">
     <!--  Right Side of "table"-->
     <div class="col-md-3"></div>
     <!--  Gameboard itself -  outer circle -->
-    <div class="col-md-6 text-center" id="gameboard">
+    <div class="col-md-6" id="gameboard">
       <!-- Colored Buttons -->
       <div id = "game-buttons">
               <div class = "green-button" id="0"></div>
@@ -86,30 +86,40 @@
               <div class = "yellow-button" id="3"></div>
             </div>
             <!-- Game Control Panel - Inner Circle -->
-            <div class="col-md-6 text-center" id="control-panel">
-              <!-- 1st row is the name -->
-              <div class="row" id="name">
+            <div class="col-md-6" id="control-panel">
+              <!-- 1st row is the Simon brand name -->
+              <div class="row text-center" id="name">
                       <span id="simon">Simon<sup>&#174;</sup></span>
                     </div>
-                    <!-- 2nd row contains strict light-->
-                    <div class ="row" id="strict-light"></div>
-                    <!--3rd row contains scoreboard and controls -->
-                    <div class="row" id="controls">
-               <div class="col-md-4" id="score-box"></div>
-               <div class="col-md-4" id="start-button"></div>
-               <div class="col-md-4" id="strict-button"></div>
-             </div>
-             <!--4th row contains text for control buttons-->
-             <div class="row" id="controls-text">
-             <div class="col-md-4" id="score-text">Count</div>
-             <div class="col-md-4" id="start-text">Start</div>
-             <div class="col-md-4" id="strict-text">Strict</div>
-             </div>
-            <!--5th row contains on-off button -->
-            <div class="row" id="on-off">
-                      <div class="col-md-2 text-right" id="on-text">ON</div>
-                      <div class="col-md-2 text-center" id="on-off-switch"><div id="onOffSwitch"></div></div>
-                      <div class="col-md-2 text-left" id="off-text">OFF</div>
+
+                    <!-- 2nd row contains 3 columns with strict light, scoreboard & controls, and labels-->
+                    <div class = "row" id = "game-controls">
+                    <!--1st column - score/count box -->
+                    <div class = "col-md-4" id="count-col">
+                      <div class = "row" id="blank-count">&nbsp;</div>
+                      <div class="row text-center" id="score-box"></div>
+                      <div class="row" id="score-text">Count</div>
+                    </div>
+
+                    <!--2nd column - start button -->
+                    <div class = "col-md-4" id="start-col">
+                      <div class = "row" id="blank-start">&nbsp;</div>
+                      <div class="row text-center" id="start-button"></div>
+                      <div class="row text-center" id="start-text">Start</div>
+                    </div>
+
+                    <!--3rd column - strict light, button, & text -->
+                    <div class = "col-md-4 text-center" id="strict-col">
+                     <div class="row" id="strict-light"></div>
+                     <div class="row" id="strict-button"></div>
+                      <div class="row" id="strict-text">Strict</div>
+                    </div>
+                  </div> <!-- End game controls -->
+
+            <!--3rd row contains on-off buttons -->
+            <div class="row text-center" id="on-off">
+              <a class = "btn btn-secondary" id="turnOn">On</a>
+              <a class = "btn btn-primary" id="turnOff">Off</a>
                     </div>
             </div> <!--End game control panel; inner circle-->
     </div><!-- End outer circle -->
