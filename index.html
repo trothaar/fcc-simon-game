@@ -70,63 +70,53 @@
 </head>
 <body>
 
+  <!-- Sound Files-->
+  <audio id="green-sound" src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" type="audio/mpeg"></audio>
+  <audio id="red-sound" src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3" type="audio/mpeg"></audio>
+  <audio id="blue-sound" src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3" type="audio/mpeg"></audio>
+  <audio id="yellow-sound" src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3" type="audio/mpeg"></audio>
+
 <div class = "container-fluid">
-  <h1>Free Code Camp Simon<sup>&#174;</sup> Game</h1>
-  <!--  Row will have three columns, with gameboardin the center-->
-  <div class = "row">
-    <!--  Right Side of "table"-->
-    <div class="col-md-3"></div>
-    <!--  Gameboard itself -  outer circle -->
-    <div class="col-md-6" id="gameboard">
-      <!-- Colored Buttons -->
-      <div id = "game-buttons">
-              <div class = "green-button" id="0"></div>
-              <div class = "red-button" id="1"></div>
-              <div class = "blue-button" id="2"></div>
-              <div class = "yellow-button" id="3"></div>
-            </div>
-            <!-- Game Control Panel - Inner Circle -->
-            <div class="col-md-6" id="control-panel">
-              <!-- 1st row is the Simon brand name -->
-              <div class="row text-center" id="name">
-                      <span id="simon">Simon<sup>&#174;</sup></span>
-                    </div>
 
-                    <!-- 2nd row contains 3 columns with strict light, scoreboard & controls, and labels-->
-                    <div class = "row" id = "game-controls">
-                    <!--1st column - score/count box -->
-                    <div class = "col-md-4" id="count-col">
-                      <div class = "row" id="blank-count">&nbsp;</div>
-                      <div class="row text-center" id="score-box"></div>
-                      <div class="row" id="score-text">Count</div>
-                    </div>
+    <!--  Right Side of screen-->
+    <div class="col-md-2"></div>
 
-                    <!--2nd column - start button -->
-                    <div class = "col-md-4" id="start-col">
-                      <div class = "row" id="blank-start">&nbsp;</div>
-                      <div class="row text-center" id="start-button"></div>
-                      <div class="row text-center" id="start-text">Start</div>
-                    </div>
+    <!--  Center Column for Game & Controls -->
+    <div class="col-md-8">
+      <!-- Game Title-->
+        <h1 id="title">Free Code Camp Simon<sup>&#174;</sup> Game</h1>
 
-                    <!--3rd column - strict light, button, & text -->
-                    <div class = "col-md-4 text-center" id="strict-col">
-                     <div class="row" id="strict-light"></div>
-                     <div class="row" id="strict-button"></div>
-                      <div class="row" id="strict-text">Strict</div>
-                    </div>
-                  </div> <!-- End game controls -->
+        <!-- Control Switches -->
+        <div id = "game-controls">
+        <a class = "btn btn-success" id="start-btn">Start Game</a>
+        <a class = "btn btn-secondary" id="strict-on">Strict Mode On</a>
+        <a class = "btn btn-primary" id="strict-off">Strict Mode Off</a>
+        <a class = "btn btn-warning" id="reset-btn">Reset Game</a>
+      </div>
 
-            <!--3rd row contains on-off buttons -->
-            <div class="row text-center" id="on-off">
-              <a class = "btn btn-secondary" id="turnOn">On</a>
-              <a class = "btn btn-primary" id="turnOff">Off</a>
-                    </div>
-            </div> <!--End game control panel; inner circle-->
-    </div><!-- End outer circle -->
-  </div> <!-- End Gameboard Column -->
+        <!-- Gameboard -->
+        <div class = "row text-center">
+          <table id="gameboard">
+            <tr>
+              <td class = "green-button" id = "0"></td>
+              <td class = "red-button" id = "1"></td>
+            </tr>
+            <tr>
+              <td class = "blue-button" id = "2"></td>
+              <td class = "yellow-button" id = "3"></td>
+            </tr>
+          </table>
 
-    <!--  Left Side of "table"-->
-    <div class="col-md-3"></div>
+<div class = "row">
+        <table id="score-box">
+          <tr><td class="count">Press Start</td></tr>
+          <tr><td id="table-text">ROUND</td></tr>
+        </table></div></div>
+
+    </div> <!-- End Center Column -->
+
+    <!--  Left Side of screen-->
+    <div class=".col-md-2"></div>
 
   </div> <!--End main container -->
 

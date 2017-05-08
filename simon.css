@@ -1,167 +1,105 @@
-body{
-  background-color: #804000 !important;
-}
-
 h1{
-  color: #FFFFFF !important;
   text-align: center;
 }
 
-#gameboard{
-  margin: 33px;
-  border: 10px solid #333;
-  background-color: #333;
-  border-radius: 50%;
-  height: 500px;
-  width: 500px;
-  padding: 30px;
-  overflow: hidden;
-  position: relative;
-}
-
-#control-panel{
-  margin: 84px;
-  background-color: white;
-  border-radius: 50%;
-  height: 250px;
-  width: 250px;
-  padding: 30px;
-  overflow: hidden;
-  position: relative;
-  border: 10px solid #333;
-}
-
-#simon{
+#title{
   font-family: 'Alfa Slab One', cursive;
-  font-size: 42px;
+  padding-bottom: 30px;
 }
 
-#footer{
-  width: 25%;
-  padding: 25px;
-  margin-top: 25px;
-  background-color: #ffbd80;
-  border: 2px solid #908b85;
-  border-radius: 20px;
-}
-
-.red-button{
-  position: absolute;
-  background-color: red;
-  width: 50%;
-  height: 45%;
-  left: 55%;
-  right: 0%;
-  bottom: 50%;
-  top: 0%;
+#gameboard {
+  padding: 0px;
+  margin: auto;
+  margin-bottom: 25px;
+  border-radius: 150px;
+  border-collapse: separate;
+  border-spacing: 5px 5px;
 }
 
 .green-button{
-  position: absolute;
-  background-color: green;
-  width: 45%;
-  height: 45%;
-  left: 0%;
-  right: 45%;
-  bottom: 50%;
-  top: 0%;
+  background: #00cc00;
+  width: 150px;
+  height: 150px;
+  border-radius: 150px 0 0 0;
+  padding: 15px;
+}
+
+.red-button{
+  background: #ff1a1a;
+  width: 150px;
+  height: 150px;
+  border-radius: 0 150px 0 0;
 }
 
 .yellow-button{
-  position: absolute;
-  background-color: yellow;
-  width: 45%;
-  height: 50%;
-  left: 0;
-  right: 50%;
-  bottom: 0%;
-  top: 55%;
-
+  background: #ffff00;
+  width: 150px;
+  height: 150px;
+  border-radius: 0 0 150px 0;
 }
 
 .blue-button{
-  position: absolute;
-  background-color: blue;
-  width: 50%;
-  height: 50%;
-  left: 55%;
-  right: 0%;
-  bottom: 0%;
-  top: 55%;
+  background: #0000ff;
+  width: 150px;
+  height: 150px;
+  border-radius: 0 0 0 150px;
 }
 
-#blank-count{
-  height: 10px;
-  width: 10px;
-  border: 5px solid #FFFFFF;
-  background-color: #FFFFFF;
-  border-radius: 50%;
-  margin: auto auto 12px auto;
+#game-controls{
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-#score-box{
+.btn{
+  text-align: center;
+}
+
+#start-btn{
+  margin-right: 10px;
+}
+
+#strict-on{
+margin-right: 10px;
+}
+
+#strict-off{
+margin-right: 10px;
+}
+
+#score-box {
+  margin: 0 auto;
+}
+
+#score-box tr td{
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+}
+
+.count{
   font-family: 'VT323', monospace;
   font-weight: bold;
-  font-size: 24px;
-  height: 40px;
-  width: 60px;
+  font-size: 30px;
+  height: 60px;
+  width: 175px;
   border: 3px solid #333333;
   border-radius: 10px;
   color: #ff0000;
   background-color: #000000;
 }
 
-#score-text{
-  padding-left: 10px;
+#table-text{
+  font-weight: bold;
 }
 
-#start-col{
-  padding-left: 35px;
+.light-up{
+  opacity: 0.5;
 }
 
-#start-button {
-  margin-top: 5px;
-  height: 30px;
-  width: 30px;
-  border: 5px solid #333333;
-  background-color: red;
-  border-radius: 50%;
- }
-
- #start-text{
-   margin-top: 5px;
-   padding-right: 20px;
- }
-
- #strict-col{
-   margin-top: 15px;
-   padding-left: 20px;
- }
-
- #strict-light{
-   height: 10px;
-   width: 10px;
-   border: 5px solid #333333;
-   background-color: red;
-   border-radius: 50%;
-   margin: auto auto 5px auto;
-  }
-
-
-  #blank-start{
-    height: 10px;
-    width: 10px;
-    border: 5px solid #FFFFFF;
-    background-color: #FFFFFF;
-    border-radius: 50%;
-    margin: auto auto 15px auto;
-  }
-
- #strict-button {
-   height: 30px;
-   width: 30px;
-   border: 5px solid #333333;
-   background-color: yellow;
-   border-radius: 50%;
-   margin: auto;
-  }
+#footer{
+  width: 25%;
+  padding: 25px;
+  margin-top: 25px;
+  //background-color: #ffbd80;
+  border: 2px solid #908b85;
+  border-radius: 20px;
+}
