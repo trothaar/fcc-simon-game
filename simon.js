@@ -55,6 +55,23 @@ $(document).ready(function() {
   }
   });
 
+ //Highlights game tiles
+  function highlightBtn(id) {
+  $("#" + id).addClass("light-up");
+  setTimeout(function() {
+    $("#" + id).removeClass("light-up");
+  }, 500);
+}
+
+//Highlights game tiles & plays sound when user clicks on them
+$(".game-tile").click(function() {
+  var selectedTile = $(this).attr("id");
+  var tileTone = $("#sound" + selectedTile)[0];
+  highlightBtn(selectedTile);
+  tileTone.play();
+});
+
+
   // Simon's turn - Calculates Simon's next "move"
 function simonTurn(){
   //Increment round no and display on counter
