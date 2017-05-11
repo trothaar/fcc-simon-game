@@ -11,6 +11,12 @@ $(document).ready(function() {
   // Arrays for Simon & user's turns
   var simonArr = [];
   var userArr = [];
+  // Keeps track of whose turn it is
+  var simonMove = true;
+  var userMove = false;
+  // Used to identify individual tiles
+  var selectedTile = "";
+  var tileTone = "";
 
   // Reset the game after a loss
   function reset(){
@@ -55,20 +61,28 @@ $(document).ready(function() {
   }
   });
 
- //Highlights game tiles
+ //Highlights game tiles & plays sound
   function highlightBtn(id) {
+  tileTone = $("#sound" + id)[0];
   $("#" + id).addClass("light-up");
+  tileTone.play();
   setTimeout(function() {
     $("#" + id).removeClass("light-up");
   }, 500);
 }
 
 //Highlights game tiles & plays sound when user clicks on them
+//Uses helper fn highlightBtn
 $(".game-tile").click(function() {
-  var selectedTile = $(this).attr("id");
-  var tileTone = $("#sound" + selectedTile)[0];
+  var pos = 0;
+  selectedTile = $(this).attr("id");
   highlightBtn(selectedTile);
-  tileTone.play();
+  userArr.push(selectedTile);
+  if(userArr[pos] != simonArr[pos]){
+    window.alert("Error - Try Again");
+    simonSays(simonArr);
+  }
+  pos++;
 });
 
 
@@ -76,7 +90,7 @@ $(".game-tile").click(function() {
 function simonTurn(){
   //Increment round no and display on counter
   round++;
-  $("counter").text("Round " + round);
+  $(".count").text("Round " + round);
  // Calculate next move and push into simonArr
  var nextMove = Math.floor((Math.random() * 4));
  simonArr.push(nextMove);
@@ -84,10 +98,24 @@ function simonTurn(){
  simonSays(simonArr);
 }
 
-  //Helper fn for simonTurn - takes array of "moves"
-  //Lights up tiles and plays sounds
+//Helper fn for simonTurn - takes array of "moves"
+//Lights up tiles and plays sounds
 function simonSays(arr){
-  //TODO
+  index = 0;
+  function nextBtn() {
+    highlightBtn(arr[index]);
+    index++;
+  }
+  nextBtn();
+
+  var presser = window.setInterval(function () {
+    if (index >= arr.length) {
+      clearTimeout(presser);
+      userMove = true;
+      return;
+    }
+    nextBtn();
+  }, 750);
 }
 
 // User's turn
