@@ -78,7 +78,7 @@ $(document).ready(function() {
 //Uses helper fn highlightBtn
 $(".game-tile").click(function() {
   steps++; // Increment steps
-  if(userMove === true){
+  if(userMove === true && steps <= round){
   selectedTile = $(this).attr("id");
   userArr.push(selectedTile);
   // CASE 1: Strict on; user makes mistake - end game
@@ -91,7 +91,6 @@ $(".game-tile").click(function() {
     $(".count").text("ERROR");
     tries++; // Keep track of attempts
     userArr = []; //Reset user array
-    console.log("Simon array = " + simonArr);
     setTimeout(function() {
       $(".count").text("Round " + round);
       simonSays(simonArr); //Simon reminds user of correct moves
@@ -106,8 +105,16 @@ $(".game-tile").click(function() {
   pos++;
   tries = 1;
 }
+}else if(userMove === true && steps>round){
+  //Reset everything and send game back to Simon
+  userMove = false;
+  userArr = [];
+  pos = 0;
+  steps = 0;
+  tries = 1;
+  simonTurn();
 }else{
-  window.alert("Error");
+  errorTone.play();
 }
 });
 
