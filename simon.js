@@ -3,16 +3,15 @@ $(document).ready(function() {
   var round = 0;
   // Keep track of user moves and attempts
   var pos = 0;
-  var tries = 1;
-  var steps = 0;
+  var tries = 0;
   //Keeps track of strict mode - default is false
   var strictOn = false;
   // Arrays for Simon & user's turns
   var simonArr = [];
   var userArr = [];
-  // Keeps track of whose turn it is - if userMove is F,
+  // Keeps track of whose turn it is - if userTurn is F,
   // they'll get an error message if they try to push the buttons
-  var userMove = false;
+  var userTurn = false;
   // Used to identify individual tiles
   var selectedTile = "";
   // Sound files
@@ -27,7 +26,7 @@ $(document).ready(function() {
     simonArr = [];
     // Reset user variables
     pos = 0;
-    tries = 1;
+    tries = 0;
     // Reset counter display
     $(".count").text("Press Start");
   }
@@ -74,50 +73,74 @@ $(document).ready(function() {
   }, 500);
 }
 
-//Highlights game tiles & plays sound when user clicks on them
-//Uses helper fn highlightBtn
+// Records user moves & sends them to compareMoves
 $(".game-tile").click(function() {
-  steps++; // Increment steps
-  if(userMove === true && steps <= round){
-  selectedTile = $(this).attr("id");
+  if(userTurn === true){
+  selectedTile = parseInt($(this).attr("id"));
   userArr.push(selectedTile);
-  // CASE 1: Strict on; user makes mistake - end game
-  if(userArr[pos] != simonArr[pos] && strictOn === true){
-    errorTone.play();
-    $(".count").text("GAME OVER");
-  // Case 2: Strict off; user makes mistake - give user two chances to try again
-  }else if(userArr[pos] != simonArr[pos] && tries < 3){
-    errorTone.play();
-    $(".count").text("ERROR");
-    tries++; // Keep track of attempts
-    userArr = []; //Reset user array
-    setTimeout(function() {
-      $(".count").text("Round " + round);
-      simonSays(simonArr); //Simon reminds user of correct moves
-    }, 1500);
-  }else if(userArr[pos] != simonArr[pos] && tries === 3){
-    // If user fails on 3rd attempt, game over
-    errorTone.play();
-    $(".count").text("GAME OVER");
-  // Case 3 - User presses correct button
-  }else{
-  highlightBtn(selectedTile);
-  pos++;
-  tries = 1;
-}
-}else if(userMove === true && steps>round){
-  //Reset everything and send game back to Simon
-  userMove = false;
-  userArr = [];
-  pos = 0;
-  steps = 0;
-  tries = 1;
-  simonTurn();
+  compareMoves();
 }else{
   errorTone.play();
 }
 });
 
+// Compares user input with what Simon said to do
+function compareMoves(){
+  console.log("Simon pos = " + simonArr[pos]);
+  console.log("User arr = " + userArr);
+  console.log("User click = " + userArr[pos]);
+  // CASE 1: Strict on; user makes mistake - end game
+  if(strictOn === true && userArr[pos] != simonArr[pos]){
+    console.log("Case 1");
+    errorTone.play();
+    setTimeout(function() {
+      window.alert("Game Over");
+      reset();
+    }, 1500);
+// CASE 2: Strict off; user makes mistake - remind user & let them try again
+// User gets two extra tries
+}else if(userArr[pos] != simonArr[pos] && tries<2){
+  console.log("Case 2");
+    errorTone.play();
+    $(".count").text("ERROR");
+    userArr = []; //Reset user array
+    pos = 0; // Reset position
+    userTurn = false;
+    tries++;
+    setTimeout(function() {
+      $(".count").text("Round " + round);
+      simonSays(simonArr); //Simon reminds user of correct moves
+    }, 1500);
+// Case 2a - User out of tries; game over
+}else if(userArr[pos] != simonArr[pos] && tries===2){
+  console.log("Case 2a");
+    errorTone.play();
+    setTimeout(function() {
+      window.alert("Game Over");
+      reset();
+    }, 1500);
+  // CASE 3 - User presses correct button but has not ended sequence
+}else if(userArr.length < simonArr.length && userArr[pos] === simonArr[pos]){
+  console.log("Case 3");
+  highlightBtn(selectedTile);
+  pos++;
+// CASE 4 - User presses correct button; end of sequence; send back to Simon
+}else if(userArr.length === simonArr.length && userArr[pos] === simonArr[pos]){
+  console.log("Case 4");
+  highlightBtn(selectedTile);
+  pos = 0;
+  tries = 0;
+  userArr = [];
+  userTurn == false;
+  setTimeout(function() {
+    simonTurn();
+  }, 1500);
+}else{
+  console.log("Default");
+  return;
+}
+
+}
 
   // Simon's turn - Calculates Simon's next "move"
 function simonTurn(){
@@ -125,19 +148,20 @@ function simonTurn(){
   round++;
   if(round === 21){
     window.alert("You win!")
-    $(".count").text("GAME OVER");
+    reset();
   }else{
   // Display round # on counter
   $(".count").text("Round " + round);
  // Calculate next move and push into simonArr
  var nextMove = Math.floor((Math.random() * 4));
  simonArr.push(nextMove);
+ //console.log(simonArr);
  // Send array to simonSays fn
  simonSays(simonArr);
  }
 }
 
-//Helper fn for simonTurn - takes array of "moves"
+//Takes array of Simon's "moves"
 //Lights up tiles and plays sounds
 function simonSays(arr){
   index = 0;
@@ -150,11 +174,12 @@ function simonSays(arr){
   var presser = window.setInterval(function () {
     if (index >= arr.length) {
       clearTimeout(presser);
-      userMove = true;
+      userTurn = true;
       return;
     }
     nextBtn();
   }, 750);
+  console.log(simonArr);
 }
 
 });
