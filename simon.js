@@ -17,7 +17,8 @@ $(document).ready(function() {
   // Sound files
   var tileTone = "";
   var errorTone = $("#error-sound")[0];
-  // Reset the game after a loss
+
+  // Resets the game
   function reset(){
     console.log("Resetting ...");
     round = 0; // Reset count
@@ -36,7 +37,7 @@ $(document).ready(function() {
     reset();
   });
 
-  //Start new game
+  //Begin game
   $("#start-btn").click(function(){
     simonTurn();
   });
@@ -57,7 +58,7 @@ $(document).ready(function() {
     if(round !=0){
       window.alert("Error - Cannot Make Change While Game in Play");
     }else{
-    strictOn = true;
+    strictOn = false;
     $("#strict-on").removeClass("btn-primary"); // Hide Bootstrap btn-primary class to disable button
     $("#strict-off").addClass("btn-primary");
   }
@@ -84,7 +85,8 @@ $(".game-tile").click(function() {
 }
 });
 
-// Compares user input with what Simon said to do
+// Compares user input with what Simon said to do, then lets user complete turn,
+// sends game back to Simon, or ends game as appropriate
 function compareMoves(){
   console.log("Simon pos = " + simonArr[pos]);
   console.log("User arr = " + userArr);
@@ -98,7 +100,7 @@ function compareMoves(){
       reset();
     }, 1500);
 // CASE 2: Strict off; user makes mistake - remind user & let them try again
-// User gets two extra tries
+// User gets two more tries
 }else if(userArr[pos] != simonArr[pos] && tries<2){
   console.log("Case 2");
     errorTone.play();
@@ -111,7 +113,7 @@ function compareMoves(){
       $(".count").text("Round " + round);
       simonSays(simonArr); //Simon reminds user of correct moves
     }, 1500);
-// Case 2a - User out of tries; game over
+// CASE 2a - User out of tries; game over
 }else if(userArr[pos] != simonArr[pos] && tries===2){
   console.log("Case 2a");
     errorTone.play();
@@ -119,7 +121,7 @@ function compareMoves(){
       window.alert("Game Over");
       reset();
     }, 1500);
-  // CASE 3 - User presses correct button but has not ended sequence
+  // CASE 3 - User presses correct button but has not ended sequence; light up tiles and let user continue
 }else if(userArr.length < simonArr.length && userArr[pos] === simonArr[pos]){
   console.log("Case 3");
   highlightBtn(selectedTile);
@@ -155,7 +157,6 @@ function simonTurn(){
  // Calculate next move and push into simonArr
  var nextMove = Math.floor((Math.random() * 4));
  simonArr.push(nextMove);
- //console.log(simonArr);
  // Send array to simonSays fn
  simonSays(simonArr);
  }
